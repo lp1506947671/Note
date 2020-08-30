@@ -1,0 +1,27 @@
+1、vscode代码风格设置（文件/首选项/设置），在用户设置中添加如下设置项：
+设置光标所在行是否有矩形框线、设置标签的尖括号是否用框线框起来、设置光标放在标签上，是否有标签的注释弹出框：
+
+"editor.renderLineHighlight": "none",
+"editor.matchBrackets": false,
+"editor.hover": false
+
+
+2、安装自动打开网页的插件
+点击左侧的扩展按钮，然后点击右上的“...”更多按钮，显示下拉列表，选择“从VSIX安装”，然后选择对应的文件：
+
+windows系统选择：huazaierli.openchrome-0.0.3.vsix
+mac系统选择：techer.open-in-browser-1.1.0.vsix
+
+再点击 “立即重新加载”
+
+
+3、设置自动保存
+执行  文件/自动保存
+
+
+4、vscode设置成中文界面，按ctrl+shift+p，输入Configure Language，打开locale.json,设置：
+"locale":"zh-CN"
+
+
+
+
