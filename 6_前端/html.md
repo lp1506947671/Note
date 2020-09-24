@@ -116,6 +116,7 @@ Webstorm : 前端开发者的信仰.
 
 **4.通用块容器标签`<div>`**
 ```
+division
 1.表示文档中一块内容，具有块元素基本特性，没有其他默认样式.
 2.前端做布局（划分区域）常用的标签.
 3.多用于标签嵌套,里面可以放任何内容，任何标签(可以放自己).
@@ -171,7 +172,7 @@ Webstorm : 前端开发者的信仰.
 4.title：提示文本：
     (1)提示用户图片的作用.
     (2)推广关键字常用.
-<img src="picture/1.jpg" alt="AI" title="AI">
+
 ```
 
 ## 8.超链接
@@ -180,12 +181,21 @@ Webstorm : 前端开发者的信仰.
 1.链接到另外一个网页，具有内联元素基本特性，默认文字蓝色，有下划线,鼠标划过时变形.
 2.跳转到网站时必须添加网络传输协议(http:\\ 或者 https:\\).
 3.可跳转到互联网,也可跳转到本地.
-4.点击时打开新的窗口:在原来的<a>标签基础上添加target="_blank"属性.
+4.点击时打开新的窗口:在原来的<a>标签基础上添加target="_blank"属性默认是_self.
 5.假连接:如果项目初期没有跳转目标网址可以用"#"占位,项目上线前需用真实网址替换.
 6.<a>标签内科嵌套<img>标签
-    
-<a href="https:www.baidu.com" target="_blank"><img src="picture/1.jpg",alt="图片无法显示的时候显示的文字",alt="图片提示"></a>
 ```
+
+```html
+<!-- a标签的基本应用 -->
+    <a href="https:www.baidu.com"  title="点击一下了解更多" target="_blank"><img src="picture/1.jpg",alt="图片无法显示的时候显示的文字",alt="图片提示"></a>
+<!-- a标签的锚点定位 -->
+<a href="#top"></a>
+<!-- 发送邮件 -->
+<a href="mailto:xiaopawnye@163.com">联系我们</a>
+```
+
+
 
 ## 9.体验布局 
 
@@ -282,23 +292,31 @@ div布局:读取一行显示一行.
 **2.表格的结构**
 
 ```html
-   <table><!--表格声明-->
-        <tr><!--行-->
-            <th>表头</th>
-            <th>表头</th>    
-            <th>表头</th> 
-        </tr>
-        <tr>
-            <td>普通单元格</td>
-            <td>普通单元格</td>
-            <td>普通单元格</td>
-        </tr>
-        <tr>
-            <td>普通单元格</td>
-            <td>普通单元格</td>
-            <td>普通单元格</td>
-        </tr>
-    </table>
+   <table border="1" cellspacing="0">
+       <caption>商品清单</caption>
+       <tr>
+        <th>产品名称</th>
+        <th>品牌</th>
+        <th colspan="2">数量和入库时间</th>
+       </tr>
+       <tr>
+        <td>电脑</td>
+        <td rowspan="2">小米</td>
+        <td>200</td>
+        <td>2019-09</td>
+       </tr>
+       <tr>
+        <td>电视机</td>
+        <td>200</td>
+        <td>2019-09</td>
+       </tr>
+       <tr>
+        <td>电视机</td>
+        <td>海尔</td>
+        <td>200</td>
+        <td>2019-09</td>
+       </tr>
+   </table>
 ```
 
 **3.table 添加border属性可以添加边框(只能修改粗细),css也可以添加边框(添加边框样式种类更多)**
@@ -363,47 +381,28 @@ name属性 定义表单元素的名称，此名称是提交数据时的键名
 **5.单款/复选框默认选择: 添加属性checked = "checked"(键值相等可省略值)**
 
 ```html
-<div class="form">
-    <form action="http://www..." method="get">
+<form action="https://www.baidu.com" method="POST">
+        <p><label for="username">用户名:</label><input type="text" id="username" placeholder="请输入用户名"></p>
+        <p><label for="pwd">密码:</label><input type="password" id="pwd" placeholder="请输入密码"></p>
+        <p>男:<input type="radio" name="sex" checked="checked"> 女:<input type="radio" name="sex"></p>
+        <p>购买的课程: web前端<input type="checkbox" checked="checked">后台开发<input type="checkbox" ></p>
+        
         <p>
-            <label>姓名：</label><input type="text" name="username"/>
-        </p>
-        <p>
-            <label>密码：</label><input type="password" name="password"/>
-        </p>
-        <p>
-            <label>性别：</label>
-            <input type="radio" name="gender" value="0"/> 男
-            <input type="radio" name="gender" value="1"/> 女
-        </p>
-        <p>
-            <label>爱好：</label>
-            <input type="checkbox" name="like" value="sing"/> 唱歌
-            <input type="checkbox" name="like" value="run"/> 跑步
-            <input type="checkbox" name="like" value="swiming"/> 游泳
-        </p>
-        <p>
-            <label>照片：</label>
-            <input type="file" name="person_pic">
-        </p>
-        <p>
-            <label>个人描述：</label>
-            <textarea name="about"></textarea>
-        </p>
-        <p>
-            <label>籍贯：</label>
-            <select name="site">
-                <option value="0">北京</option>
-                <option value="1">上海</option>
-                <option value="2">广州</option>
-                <option value="3">深圳</option>
+            <select name="class">
+                <option>HTML</option>
+                <option selected="selected">CSS</option>
+                <option>JavaScript</option>
             </select>
         </p>
         <p>
-            <input type="submit" name="" value="提交">
-            <input type="reset" name="" value="重置">
+            <h3>个人描述:</h3>
+            <textarea rows="10" clos="50"></textarea>
         </p>
-</div>
+        <p>
+            <input type="submit" value="立即注册" >
+            <input type="reset" value="重置">
+            <button>按钮</button>
+        </p>
 ```
 
 **6.`<input>`标签(补充)**
@@ -415,7 +414,6 @@ type属性
     type="submit" 定义提交按钮 <!--value属性可以设置按钮文本-->
     type="reset" 定义重置按钮 <!--清空所有表单内容-->
     type="button" 定义一个普通按钮 <!--可以绑定功能-->
-    
 value属性 定义表单元素的值
 name属性 定义表单元素的名称，此名称是提交数据时的键名
 ```
