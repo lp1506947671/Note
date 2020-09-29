@@ -124,9 +124,10 @@ division
 
 **5.通用内联容器标签`<span>`**
 
-```
+```html
 1.具有内联元素基本特性,没有其他默认样式
 2.主要用来存放特殊效果的文字,小图片
+3.<span> 标签提供了一种将文本的一部分或者文档的一部分独立出来的方式。如果不对 <span> 应用样式，那么 <span> 元素中的文本与其他文本不会任何视觉上的差异
 ```
 
 **6.换行标签`<br>`**
@@ -172,7 +173,7 @@ division
 4.title：提示文本：
     (1)提示用户图片的作用.
     (2)推广关键字常用.
-
+<img src="picture/1.jpg",alt="图片无法显示的时候显示的文字" width="304" height="228">
 ```
 
 ## 8.超链接
@@ -188,7 +189,7 @@ division
 
 ```html
 <!-- a标签的基本应用 -->
-    <a href="https:www.baidu.com"  title="点击一下了解更多" target="_blank"><img src="picture/1.jpg",alt="图片无法显示的时候显示的文字",alt="图片提示"></a>
+    <a href="https:www.baidu.com"  title="点击一下了解更多" target="_blank"><img src="picture/1.jpg",alt="图片无法显示的时候显示的文字" width="304" height="228"></a>
 <!-- a标签的锚点定位 -->
 <a href="#top"></a>
 <!-- 发送邮件 -->
@@ -332,7 +333,7 @@ table{
 
 **4.table 添加`cellspacing`和`cellpadding`属性**
 
-```
+```html
 cellspacing:拉开单元格之间的距离
 cellpadding :拉开内容和td边缘之间的距离
 ```
@@ -403,6 +404,7 @@ name属性 定义表单元素的名称，此名称是提交数据时的键名
             <input type="reset" value="重置">
             <button>按钮</button>
         </p>
+ <!--lable标签的作用:for属性与input标签中的id属性相关联从而实现表格框的高亮-->
 ```
 
 **6.`<input>`标签(补充)**
@@ -454,4 +456,32 @@ textarea{
 ```
 <!-- &nbsp;空格特殊符号 -->
 ```
+
+
+
+## 15 小米官网和京东网站划分结构
+
+1.顶部栏:
+
+​	left顶部栏目:链接数目*10
+
+​	right购物城 链接*1
+
+​	right:用户操作 链接*3 a
+
+2.导航栏:
+
+​	left logo:图片链接 a+img
+
+​	left :logo
+
+​	lef:导航链接
+
+​	right:导航搜索
+
+3.内容区域
+
+3.底部区域
+
+
 
