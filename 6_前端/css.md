@@ -597,7 +597,7 @@ a{
 
 ###  5.BFC区域
 
-**一：BFC是什么东东**
+**一：BFC是什么**
 了解BFC前先一了解一下Box和Formatting Context
 
 （1）B: BOX即盒子，页面的基本构成元素。分为 inline 、 block 和 inline-block三种类型的BOX
