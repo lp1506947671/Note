@@ -18,6 +18,8 @@ css样式： 选择符和声明构成
 */
 ```
 
+**css命名规范:http://www.divcss5.com/jiqiao/j4.shtml#no2**
+
 ## 1.css的引入
 
 ### 1.css嵌入式 
@@ -125,8 +127,6 @@ ul li>a{
 
 ```
 
-
-
 ### 4.组合选择器(并集选择器)
 
 ```css
@@ -142,20 +142,34 @@ ul li>a{
 ###  5.交集选择器
 
 ```css
-h2{
-    color:red
-}
-.active{
-    font-weight:lighter;
-}
-h2.active{
-    font-size:14px
-}
-/* 1,格式:
-       选择器1选择器2...{
+<head>
+    <meta charset="UTF-8">
+    <title>15-css交集选择器.html</title>
+    
+    <style>
+        p.para1{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<!--
+        交集选择器,相交的部分就是要设置属性值的标签
+        1,格式:
+        选择器1选择器2...{
             属性:值;
-       }
-*/
+        }
+        2,注意点:
+        (1),选择器之间没有任何的连接符号
+        (2),选择器可以是标签名称,也可以是id、class名称
+        (3),交集选择器仅仅是了解
+    -->
+<p>我是段落</p>
+<p>我是段落</p>
+<p class="para1">我是段落</p>
+<p class="para1">我是段落</p>
+<p>我是段落</p>
+</body>
 ```
 
 ### 6.伪类选择器
@@ -190,9 +204,9 @@ div:hover span{
 | 选择器                       | 应用场景                                                     |
 | ---------------------------- | ------------------------------------------------------------ |
 | 标签选择器                   | 对页面中相同的元素，设置共同的属性                           |
-| id选择器                     | * 任何的元素都可以设置id<br/>            * id是唯一，并且不能重复，表示选中的是有“特性的元素” |
-| class选择器                  | * 任何的元素都可以设置类<br/>            * 一个元素中可以设置多个类<br/>            * 一定要有“归类的概念，公共类的想法”。选中的页面元素，设置相同的属性 |
-| 后代（爸爸的儿子，孙子....） | *  div p{}                                                   |
+| id选择器                     | * 任何的元素都可以设置id<br/>* id是唯一，并且不能重复，表示选中的是有“特性的元素” |
+| class选择器                  | * 任何的元素都可以设置类<br/> * 一个元素中可以设置多个类<br/> * 一定要有“归类的概念，公共类的想法”。选中的页面元素，设置相同的属性 |
+| 后代（爸爸的儿子，孙子....） | *div p{}                                                     |
 | 子代（亲儿子）               | div>p                                                        |
 | 交集选择器                   | 选择器1选择器2{}                                             |
 | 伪类选择器                   | 爱恨准则  LoVe HAte<br/>                    + a:link{}<br/>                    + a:visited{}<br/>                    + a:hover{}<br/>                    + a:active{}<br/>注意：:hover可以应用于任何的元素 |
@@ -296,44 +310,6 @@ div:hover span{
 </html>
 ```
 
-
-
-### 1.布局常用样式属性
-
-```css
-width :设置元素(标签)的宽度
-height:设置元素(标签)的高度
-background:设置元素背景色或者背景图片
-border:设置元素四周的边框
-padding 设置元素包含的内容和元素边框的距离，也叫内边距
-margin 设置元素和外界的距离，也叫外边距
-float 设置元素浮动
-```
-
-### 2.文本常用样式属性
-
-```css
-   p{
-      /* 文字颜色 */
-      color: blue;
-      /* 是否加粗 */
-      font-weight: bold;
-      /* 是否倾斜 */
-      font-style: italic;
-      /* 文字修饰线 */
-      text-decoration: underline; 
-      /* 字号 */
-      font-size: 20px; 
-      /* 行高 */
-      line-height: 100px;
-      /* em是一个字的大小 */
-      /* 首行缩进 */
-      text-indent: 2em;
-      /* 字体 */
-      font-family: "宋体";
-    }
-```
-
 ### 3.显示隐藏 
 
 ```css
@@ -356,7 +332,7 @@ overflow的设置项：
 4、auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。(前端布局时水平方向不允许有滚动条)
 ```
 
-### 6.居中
+### 5.居中
 
 **文字居中** 
 
@@ -379,6 +355,113 @@ overflow的设置项：
 块元素如果想设置相对页面水平居中，可以使用margin值中的auto关键字，“auto”只能用于左右的margin设置，不能用于上下的.
 margin: 0px auto;
 ```
+
+**1.行内元素水平居中**
+
+```css
+ display:table-cell
+ vertical-align:middle
+```
+
+**2.块级元素水平居中一:**
+
+```css
+/*position+margin*/
+.father{
+position:relative;
+}
+.child{
+    position:absolute;
+    margin:auto:
+    left:0;
+    right:0;
+    top:0;
+    botoom:0;
+}
+```
+
+**3.块级元素水平居中二:**
+
+```css
+/* display:table-cell*/
+.father{
+		width: 200px;
+		height: 200px;
+		background-color: red;
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+.son{
+    width: 100px;
+    height: 100px;
+    background-color:green;
+    display: inline-block;
+
+}
+```
+
+**4.块级元素垂直水平居中方法三**
+
+```css
+/* 纯定位 */
+.father{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    position: relative;
+
+}
+.son{
+    width: 100px;
+    height: 100px;
+    background-color:green;
+    position: absolute;
+    margin-left: 50px;
+    margin-top: 50px;
+```
+
+### 6.背景属性
+
+```css
+background-image: url('images/scholl_flower.jpeg');
+/*平铺方式*/
+background-repeat:no-repeat; 
+/*背景定位*/
+background-position:  50px 100px;
+background-position-x: 100px;
+background-position-y: 200px;
+/*关键字：top right bottom left center*/
+background-position: bottom right;
+/*百分比： 0% 50% 100%*/
+/*水平百分比的值 =  容器宽度的百分比- 背景图片宽度百分比*/
+background-position: 30% 60%;
+background-position: 270px 600px;
+background: url("images/MIUI.png")no-repeat center top;
+```
+
+### 7.雪碧图技术
+
+- 静态图片,不随用户的信息变化而变化
+
+- 小图片,图片比较大小(2~3kb)
+
+- 加载量比较大
+
+  一些大图不建议使用雪碧图
+
+  通过css的背景属性的background'-position来控制雪碧图的显示
+
+  有效减少了Http请求的数量,加速了内容的显示.因为没请求一次,就会和服务器链接一次,建立链式连接需求需要额外的时间开销
+
+### 8.边框阴影
+
+```css
+/*box-shadow:水平方向 垂直方向 虚化程度 颜色 是否内部虚化; */
+box-shadow: 20px 20px 50px black inset;
+```
+
+
 
 ## 4.盒子模型 
 
@@ -519,8 +602,6 @@ margin:20px;
 </html>
 ```
 
-
-
 ## 5.css的初始化 
 
 **1.大部分标签存在默认样式(主要影响布局的属性为内外边距)需要清除**
@@ -555,8 +636,10 @@ a{
     a:hover{text-decoration:underline}
     fieldset,img{border:0;vertical-align:top;}
     a,button{cursor:pointer;}
-/*注意:百度resetcss*/
+
 ```
+
+**注意:**百度resetcss
 
 ## 6.浮动
 
@@ -582,23 +665,29 @@ a{
 3.浮动元素有收缩现象(没有指定宽度的左浮动盒子)
 ```
 
+**注意:**由于包裹性的特点，浮动元素一般需要手动设置width
+
+**参考:**https://blog.csdn.net/Light__1024/article/details/86741766
+
 ### 4.消除浮动元素的破坏性
 
-注意:子类的浮动元素不能撑起父类的边框
+注意:子类的浮动使自己父元素的高度塌陷
 
 | 方法                   | 规则/应用                                                    | 缺点                     |
 | ---------------------- | ------------------------------------------------------------ | ------------------------ |
 | 1.给父元素设置固定高度 | 网页中盒子固定高度区域,比如固定导航栏                        | 使用不灵活后期不容易维护 |
 | 2.内墙法               | 在最后一个浮动元素的后面加一个空的块级元素,并且设置该属性clear:both | 结构冗余                 |
-| 3.伪元素(选择器)清除   | css选择器名::after{content:''/*行内元素*/,display:block,clear:both} |                          |
+| 3.伪元素(选择器)清除.  | ..clearfix::after{content:'',display:block,clear:both}       |                          |
 | 4.overflow:hidden      | BFC区域:计算BFC区域的高度时,浮动元素的高度也参与计算 <br>形成BFC的条件:除了overflow:visitable的属性值外(hidden,scroll,auto,inherit都可以) |                          |
 
 **注意:**BFC(Block Formtting Context)
 
+**参考:**https://blog.csdn.net/m0_37922443/article/details/108098474
+
 ###  5.BFC区域
 
 **一：BFC是什么**
-了解BFC前先一了解一下Box和Formatting Context
+**了解BFC前先一了解一下Box和Formatting Context**
 
 （1）B: BOX即盒子，页面的基本构成元素。分为 inline 、 block 和 inline-block三种类型的BOX
 
@@ -606,12 +695,12 @@ a{
 
 常见的 Formatting Context 有 Block fomatting context (简称BFC)和 Inline formatting context (简称IFC)
 
-BFC 定义
-	BFC(Block formatting context)直译为"块级格式化上下文"。它是一个独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。
+**BFC 定义**
+	BFC(Block formatting context)直译为"块级格式化上下文"。它是一个独立的渲染区域，只有Block-level box参与,它规定了内部的Block-level Box如何布局,并且与这个区域外部毫不相干,也是浮动元素与其他元素交互的区域
 
 **二:box布局规则：**
 
-1. 内部的Box会在垂直方向，一个接一个地放置。
+1. 内部的Box会在垂直方向,一个接一个地放置。
 2. Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin_top会发生重叠(margin塌陷)
 3. 每个元素的margin box的左边,与包含块border box的左边相接触(对于从左往右的格式化,否则相反)。即使存在浮动也是如此(浮动脱离文档流)。
 
@@ -630,6 +719,10 @@ BFC 定义
 
 3. 计算BFC的高度时，浮动元素也参与计算
 
+**注意:**浮动能够使行内元素具备改变宽高的能力
+
+**参考:**https://www.jianshu.com/p/e69394e960d5
+
 ## 4.定位
 
 ### 1.相对定位 
@@ -645,11 +738,6 @@ BFC 定义
 ```css
 我们可以使用css的position属性来设置元素的定位类型:
 <relative> 生成相对定位元素，一般是将父级设置相对定位，子级设置绝对定位，子级就以父级作为参照来定位，否则子级相对于body来定位。
-
-特点:
-1、改变位置的参照物是他自己
-2、占位 脱离   标准流/文档流（标签默认的显示方式）
-3、还具备换行标签的特点
 ```
 
 **3.定位代码实例**
@@ -667,15 +755,10 @@ BFC 定义
 
 ### 2.绝对定位 
 
-**1.绝对定位**
-
 ```
-<absolute> 生成绝对定位元素，元素脱离文档流，不占据文档流的位置，可以理解为漂浮在文档流的上方，相对于上一个设置了定位的父级元素来进行定位，如果找不到，则相对于body元素进行定位。
-
-特点:
-1、不占位
-2、参照物默认是浏览器，改：以最近的已经定位的父级为参照物条件
-3、不具备换行标签的特点
+<absolute> 生成绝对定位元素，
+元素脱离文档流，不占据文档流的位置，可以理解为漂浮在文档流的上方，
+相对于上一个设置了定位的父级元素来进行定位，如果找不到，则相对于body元素进行定位。
 ```
 
 ```css
@@ -684,20 +767,17 @@ BFC 定义
             position:absolute;
             left:50px;
             top:50px;
-        }
+  }
 ```
 
 ### 3.固定定位 
 
-**1.固定定位**
+**1.定义**
 
 ```
-<fixed> 生成固定定位元素，元素脱离文档流，不占据文档流的位置，可以理解为漂浮在文档流的上方，相对于浏览器窗口进行定位。
-
-特点:
-1、不占位
-2、参照物是浏览器
-3、不具备换行标签的特点
+<fixed> 生成固定定位元素，
+元素脱离文档流，不占据文档流的位置，
+可以理解为漂浮在文档流的上方，相对于浏览器窗口进行定位。
 ```
 
 **2.注意:坐标轴的定义:x轴为从左向右依次增大,y轴为上到下依次增大.**
@@ -709,6 +789,16 @@ BFC 定义
 | 相对定位:relative |                  不脱离文档流,可以调整元素                   |                     以原来的位置为参考点                     |
 | 绝对定位:absolute |       脱离标准文档流,在页面占位置<br>层级提高,压盖现象       | 相对于最近的非static祖先元素,如果没有非static祖先元素,那么以页面根元素左上角进行定位,网站中实战应用:"子绝父相" |
 | 固定定位          | 脱离标准文档流<br>一旦设置固定定位，在页面中滚动网页，固定不变<br> |    以浏览器的左上角(应用:小广告， 回到顶部 ，固定导航栏)     |
+
+**注意:**除相对定位外其他定位能够改变行内元素的宽高
+
+### 5 z-index
+
+   **定义:指定一个元素的堆叠顺序**
+
+- z-index只用于定位中
+- z-index默认是auto,值越大优先级越高
+- z-index有"从父现象"父级大则相应的子集也就大 
 
 
 
@@ -763,7 +853,7 @@ filter:alpha(opacity=30);
  background: rgba(0,0,0,0.6);
 ```
 
-## 11页面嵌套 
+## 5.页面嵌套 
 
 **1.iframe:元素会创建包含另外一个文档的内联框架（即行内框架）。**
 
