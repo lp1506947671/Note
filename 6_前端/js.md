@@ -906,9 +906,292 @@ console.log(args.name);
 console.log(args.pwd);
 ```
 
+## 5.DOM
 
+### 1.节点的分类
 
-##  4:JS高级语法
+| 名称           | 描述     |
+| -------------- | -------- |
+| element node   | 元素节点 |
+| text node      | 文本节点 |
+| attribute node | 属性节点 |
+
+###  2.节点属性
+
+|          | nodeName         | nodeValue         | nodeType |
+| -------- | ---------------- | ----------------- | -------- |
+| 元素节点 | 与标签名相同     | undefined 或 null | 1        |
+| 属性节点 | 属性的名称       | 文本自身          | 2        |
+| 文本节点 | 永远是 #text     | 属性的值          | 3        |
+| 文档节点 | 永远是 #document |                   | 9        |
+
+###  3.获取元素节点的方法
+
+| 方法                                    | 方法名                 |
+| --------------------------------------- | ---------------------- |
+| document.getElementById('classList')    | 通过id查找html元素     |
+| document.getElementsByTagName('li')     | 通过标签查找html元素   |
+| document.getElementsByClassName('item') | 通过类名找到 HTML 元素 |
+
+**注意:** 获取到一个节点对象集合,有点像数组  push()
+
+### 4.获取属性节点的方法
+
+| 方法                                             | 描述           |
+| ------------------------------------------------ | -------------- |
+| 属性节点对象集合.getAttribute('属性名');         | 获取某个属性   |
+| 属性节点对象集合.setAttribute('属性名','属性值') | 设置某个属性值 |
+
+**注意:**设置属性并不会改变前端的
+
+### 5.节点对象的其他常用属性
+
+| 属性                                                         | 方法名                     |
+| ------------------------------------------------------------ | -------------------------- |
+| 节点对象集合.childNodes                                      | 返回元素的一个子节点的数组 |
+| 节点对象集合.firstChild(等同于:节点对象集合.childNodes[0])   | 返回元素的第一个子节点     |
+| 节点对象集合.lastChild(等同于:节点对象集合.childNodes[oFather.childNodes.length - 1]) | 返回元素的最后一个子节点   |
+| 节点对象集合.parentNode                                      | 返回元素的父节点           |
+| 节点对象集合.nextSibling                                     | 返回该元素紧跟的一个节点   |
+| 节点对象集合.previousSibling                                 | 返回某个元素紧接之前元素   |
+
+```js
+function get_childNodes(fatherNode){
+			var nodes = fatherNode.childNodes;
+			var arr = [];//保存已经获取的元素节点对象
+			for(var i = 0; i < nodes.length; i++){
+				if (nodes[i].nodeType === 1) {
+					arr.push(nodes[i]);
+				}
+			}
+			return arr;
+
+		}
+		var childnodes = get_childNodes(oFather);
+		console.log(childnodes[0]);
+```
+
+```js
+function get_nextSibling(n){
+			var x = n.nextSibling;
+			while(x  && x.nodeType != 1){
+				x = x.nextSibling;
+			}
+			return x;
+		}
+		console.log(get_nextSibling(oFather));
+```
+
+### 6.元素节点对象的增删改查
+
+| 方法名                              | 描述         |
+| ----------------------------------- | ------------ |
+| document.createElement()            | 创建节点     |
+| 节点对象.appendChild()              | 插入节点     |
+| 节点对象.appendChild(newNode,node)  | 插入节点     |
+| 节点对象.removeChild(childNode)     | 删除节点     |
+| 节点对象.replaceChild(newNode,node) | 替换节点     |
+| document.createTextNode()           | 创建文本节点 |
+| 节点对象.innerHTML(html内容)        |              |
+| 节点对象.innerText(文本内容)        |              |
+
+###  7.操作元素属性
+
+1.直接操作样式属性
+
+```js
+var para = document.getElementById('box');
+1、直接操作样式属性
+console.log(para.style);
+para.style.color = 'white';
+para.style.backgroundColor = 'black';
+para.style.width = '250px';
+para.style.height = '250px';
+para.style.textAlign = 'center';
+para.style.lineHeight  = '250px';
+para.style.fontSize  = '30px';
+```
+
+ 2.通过控制属性的类名来控制样式
+
+```js
+<style type="text/css">
+		.highLight{
+			background-color: black;
+			color: white;
+			width: 250px;
+			height: 250px;
+			line-height: 250px;
+			text-align: center;
+			font-size: 30px;
+		}
+</style>
+para.setAttribute('class', 'highLight');
+```
+
+**注意:**
+html的属性和js里面属性写法一样
+
+“style” 属性里面的属性,有横杠的改成驼峰式,比如：“font-size”,改成”style.fontSize”
+
+“class” 属性写成 “className”
+
+### 8.事件
+
+**1.常用的事件方法**
+
+| 事件名      | 作用                 |
+| ----------- | -------------------- |
+| onclick     | 鼠标单击事件         |
+| onmouseover | 鼠标经过事件         |
+| onmouserout | 鼠标移开事件         |
+| onchange    | 文本框内容改变事件   |
+| onselect    | 文本框内容被选中事件 |
+| onfocus     | 光标聚焦事件         |
+| onblur      | 光标失焦事件         |
+| onload      | 网页加载事件         |
+
+**鼠标点击事件的两种方法**
+
+方法一:
+
+```html
+<div id="box" onclick="add();"></div>
+<script type="text/javascript">
+    function add (){
+        	var isBlue = true;
+	 		if (isBlue) {
+	 			// this 指向了当前的元素节点对象
+	 			this.style.backgroundColor = 'red';
+	 			isBlue = false;
+	 		}else{
+				this.style.backgroundColor = 'blue';
+	 			isBlue = true;
+	 		}
+	 	};
+</script>
+```
+
+方法二:
+
+```html
+<div id="box" ></div>
+<script type="text/javascript">
+	 	var oDiv = document.getElementById('box');
+	 	var isBlue = true;
+	 	oDiv.onclick = function(){
+	 		if (isBlue) {
+	 			// this 指向了当前的元素节点对象
+	 			this.style.backgroundColor = 'red';
+	 			isBlue = false;
+	 		}else{
+				this.style.backgroundColor = 'blue';
+	 			isBlue = true;
+	 		}
+	 	};	
+ </script>
+```
+
+**鼠标悬浮事件**
+
+```html
+<div id="box">
+<script type="text/javascript">
+    var oDiv = document.getElementById('box');
+    // 2.鼠标滑过事件  
+    oDiv.onmouseover = function(){
+        console.log(111);
+        // 3.事件处理程序
+        this.style.backgroundColor = 'green';
+    };
+    // 2.鼠标移开事件  
+    oDiv.onmouseout = function(){
+        // 3.事件处理程序
+        this.style.backgroundColor = 'red';
+    }
+</script></script>
+```
+
+**光标聚焦和失焦事件**
+
+```html
+<form action="">
+		<p class="name">
+			<label for="username">用户名：</label>
+			<input type="text" name="user" id="username">
+		</p>
+		<p class="pwd">
+			<label for="pwd">密码：</label>
+			<input type="password" name="wpd" id="pwd">
+		</p>
+		<input type="submit" name="">
+</form>
+<script type="text/javascript">
+		var userName = document.getElementById('username');
+		var newNode = document.createElement('span');
+		userName.onfocus = function(){
+			newNode.innerHTML = '请输入用户名';
+			newNode.setAttribute('class', 'text')
+			userName.parentNode.appendChild(newNode);
+		}
+		userName.onblur = function(){
+			newNode.innerHTML = '请输入正确的用户名';
+			newNode.setAttribute('class', 'text')
+			userName.parentNode.appendChild(newNode);
+		}
+</script>
+```
+
+**内容的选中事件和改变事件**
+
+```html
+<label>
+		<textarea cols="30" rows="10">请写入个人简介，字数不少于200字</textarea>
+</label>
+<label>
+		<input type="text" name="" value="mjj">
+</label>
+<script type="text/javascript">
+		var textArea = document.getElementsByTagName('textarea')[0];
+		var inputObj = document.getElementsByTagName('input')[0];
+
+		textArea.onselect = function(){
+			console.log('内容被选中');
+		};
+		inputObj.onchange = function(){
+			console.log('内容被改变了');
+		};
+		inputObj.oninput = function(){
+			console.log('内容被实时改变了');
+			console.log(this.value);
+		};
+</script>
+```
+
+**窗口加载事件**
+
+```html
+<script type="text/javascript">
+/*方法一*/
+setTimeout(function(){
+			var oDiv = document.getElementById('box');
+			console.log(oDiv);
+			oDiv.onclick = function(){
+				this.innerHTML = 'alex';
+			}
+		}, 0)
+/*方法二*/  
+window.onload = function(){
+			var oDiv = document.getElementById('box');
+			console.log(oDiv);
+			oDiv.onclick = function(){
+				this.innerHTML = 'alex';
+			}
+		}
+</script>
+```
+
+##  6:JS高级语法
 
 ### 4.1:元素
 
@@ -1004,7 +1287,7 @@ console.log(args.pwd);
 </script>
 ```
 
-## 
+
 
 ### 4.2:事件
 
