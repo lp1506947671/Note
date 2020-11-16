@@ -821,6 +821,8 @@ function randomColor(){
 		document.body.style.backgroundColor = rc;
 ```
 
+
+
 ## 4.BOM
 
 ### 1.定义
@@ -865,7 +867,11 @@ let num = 0;
     }, 1000);
 ```
 
-**注意:为了释放浏览器缓存会在关闭定时器后使用oTimer = null**
+**注意:**
+
+1.为了释放浏览器缓存会在关闭定时器后使用oTimer = null
+
+2.延迟时间为毫秒
 
 ### 3.location对象
 
@@ -905,6 +911,8 @@ let args  = getQueryString();
 console.log(args.name);
 console.log(args.pwd);
 ```
+
+
 
 ## 5.DOM
 
