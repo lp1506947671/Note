@@ -699,7 +699,7 @@ a{
 | ---------------------- | ------------------------------------------------------------ | ------------------------ |
 | 1.给父元素设置固定高度 | 网页中盒子固定高度区域,比如固定导航栏                        | 使用不灵活后期不容易维护 |
 | 2.内墙法               | 在最后一个浮动元素的后面加一个空的块级元素,并且设置该属性clear:both | 结构冗余                 |
-| 3.伪元素(选择器)清除.  | ..clearfix::after{content:'',display:block,clear:both}       |                          |
+| 3.伪元素(选择器)清除.  | `.clearfix::after{content:'',display:block,clear:both}`      |                          |
 | 4.overflow:hidden      | BFC区域:计算BFC区域的高度时,浮动元素的高度也参与计算 <br>形成BFC的条件:除了overflow:visitable的属性值外(hidden,scroll,auto,inherit都可以) |                          |
 
 **注意:**BFC(Block Formtting Context)
