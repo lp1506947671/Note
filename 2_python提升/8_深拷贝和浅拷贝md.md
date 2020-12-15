@@ -77,3 +77,107 @@ from imp import reload
 reload(reload_test)
 ```
 
+**3.注意事项**
+
+main.py
+
+```python
+from recv_msg import *
+from handle_msg import *
+
+
+def main():
+    # 1. 接收数据
+    recv_msg()
+    # 2. 测试是否接收完毕
+    test_recv_data()
+    # 3. 判断如果处理完成，则接收其它数据
+    recv_msg_next()
+    # 4. 处理数据
+    handle_data()
+    # 5. 测试是否处理完毕
+    test_handle_data()
+    # 6. 判断如果处理完成，则接收其它数据
+    recv_msg_next()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+recv_msg.py
+
+```python
+from common import RECV_DATA_LIST
+from common import HANDLE_FLAG
+# import common
+
+
+def recv_msg():
+    """模拟接收到数据，然后添加到common模块中的列表中"""
+    print("--->recv_msg")
+    for i in range(5):
+        RECV_DATA_LIST.append(i)
+
+
+def test_recv_data():
+    """测试接收到的数据"""
+    print("--->test_recv_data")
+    print(RECV_DATA_LIST)
+
+
+def recv_msg_next():
+    """已经处理完成后，再接收另外的其他数据"""
+    print("--->recv_msg_next")
+    if HANDLE_FLAG:
+    # if common.HANDLE_FLAG:
+        print("------发现之前的数据已经处理完成，这里进行接收其他的数据(模拟过程...)----")
+    else:
+        print("------发现之前的数据未处理完，等待中....------")
+```
+
+handle_msg.py
+
+```python
+from common import RECV_DATA_LIST
+from common import HANDLE_FLAG
+# import common
+
+
+def handle_data():
+    """模拟处理recv_msg模块接收的数据"""
+    print("--->handle_data")
+    for i in RECV_DATA_LIST:
+        print(i)
+
+    # 既然处理完成了，那么将变量HANDLE_FLAG设置为True，意味着处理完成
+    global HANDLE_FLAG
+    HANDLE_FLAG = True
+    # common.HANDLE_FLAG = True
+
+
+def test_handle_data():
+    """测试处理是否完成，变量是否设置为True"""
+    print("--->test_handle_data")
+    if HANDLE_FLAG:
+    # if common.HANDLE_FLAG:
+        print("=====已经处理完成====")
+    else:
+        print("=====未处理完成====")
+```
+
+commom.py
+
+```python
+RECV_DATA_LIST = list()  # 用来存储数据
+HANDLE_FLAG = False  # 用来标记是否处理完成
+```
+
+**HANDLE_FLAG为什么没有被修改为Ture?**
+
+在handle_msg.py文件中，HANDLE_FLAG的使用方式为 from common import HANDLE_FLAG ，该导入方式相当于是在handle_msg.py 生成一个叫做HANDLE_FLAG 的变量，并且这个变量指向的是common.py里面HANDLE_FLAG的值（False），当在执行 HANDLE_FLAG =True 这行代码时 其实是将变量handle_msg.py中的 HANDLE_FLAG 重新指向了一个新的值为True（这个过程可以理解为赋值的过程，即修改的是变量的指向而不是变量指向的值），此时common里面的HANDLE_FLAG 值依然是False， 所以在recv_msg.py使用 from common import HANDLE_FLAG 导入时，HANDLE_FLAG这个变量仍指向False。
+
+**如何解决这个问题？**
+在handle_msg.py文件中，将HANDLE_FLAG的使用方式改为 import common，再使用common.HANDLE_FLAG 调用即可解决。具体原理可以理解为：在handle_msg.py中生成一个叫做common的变量，这个变量指向的是common文件，而common.HANDLE_FLAG可以理解为指向common文件中的 HANDLE_FLAG 变量名而不是这个变量名的值，所以在handle.py执行 common.HANDLE_FLAG=Ture 让它的指向从False变成了True后，在recv_msg.py使用 common.HANDLE_FLAG可以获取到Ture这个值。
+
+[1]https://www.cnblogs.com/testlearn/p/12364724.html
